@@ -1,0 +1,83 @@
+import tkinter as tk
+from tkinter import messagebox
+import tkinter as tk
+
+# Create the main window
+root = tk.Tk()
+
+# Set window properties
+root.title("My First Tkinter App")
+root.geometry("400x300")
+
+# Add a label widget
+label = tk.Label(root, text="Hello, Tkinter!")
+label.pack(pady=20) # Add some padding
+
+# Start the Tkinter event loop
+root.mainloop()
+# --- Mood Questions ---
+questions = [
+    "How are you feeling today? (calm / hyped / in-between)",
+    "Had a stressful day or a smooth one? (stressful / smooth)",
+    "Craving something to lift your energy or help you unwind? (lift / unwind)",
+    "Would you rather hear something soulful and slow, or upbeat with a groove? (soulful / groove)",
+    "Do you want something to hit deep, or a vibe that just feels good? (deep / feel-good)"
+]
+
+answers = []
+current_question = 0
+
+# --- Main Function to Evaluate Mood ---
+def get_vibe():
+    calm_score = sum(a in ["calm", "unwind", "soulful", "deep"] for a in answers)
+    hype_score = sum(a in ["hyped", "lift", "groove", "feel-good"] for a in answers)
+
+    if calm_score >= 3:
+        vibe = "R&B Jam 🎶"
+        desc = "Smooth, soulful, and mellow — perfect for relaxing or reflecting."
+    elif hype_score >= 3:
+        vibe = "Drum & Bass ⚡"
+        desc = "Fast-paced, rhythmic, and energizing — great for focus or movement."
+    else:
+        vibe = "Indie Mix 🌙"
+        desc = "Dreamy, warm, and balanced — ideal for daydreaming or cruising."
+
+    messagebox.showinfo("Your Music Vibe", f"Recommended vibe: {vibe}\n\n{desc}")
+
+# --- Handlers ---
+def submit_answer():
+    global current_question
+    ans = entry.get().strip().lower()
+    if not ans:
+        messagebox.showwarning("Oops!", "Please enter a response.")
+        return
+
+    answers.append(ans)
+    entry.delete(0, tk.END)
+    current_question += 1
+
+    if current_question < len(questions):
+        question_label.config(text=questions[current_question])
+    else:
+        get_vibe()
+        root.destroy()
+
+# --- Tkinter UI Setup ---
+root = tk.Tk()
+root.title("Project SoundState 🎧")
+root.geometry("500x300")
+root.config(bg="#5df2ff")
+
+title_label = tk.Label(root, text="What's Your Mood?", font=("Helvetica", 18, "bold"), fg="#f5f5f5", bg="#1c1c1c")
+title_label.pack(pady=20)
+
+question_label = tk.Label(root, text=questions[current_question], font=("Helvetica", 12), fg="#cccccc", bg="#1c1c1c", wraplength=400, justify="center")
+question_label.pack(pady=10)
+
+entry = tk.Entry(root, font=("Helvetica", 12), width=40, justify="center")
+entry.pack(pady=10)
+
+submit_button = tk.Button(root, text="Submit", font=("Helvetica", 12, "bold"), bg="#4CAF50", fg="white", width=10, command=submit_answer)
+submit_button.pack(pady=15)
+
+root.mainloop()
