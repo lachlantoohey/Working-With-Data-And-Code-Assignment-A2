@@ -1,0 +1,167 @@
+# notes
+C = 60
+A = 45
+E = 52
+G = 55
+B = 47
+D = 50
+Cl = 48
+F = 53
+Dh = 62 
+Gl = 43
+Bh = 59
+
+playSound(1068, beats = 8)
+
+def Main():
+    with reverb("Space Echo",1):
+        playNote([C,A],0.5, sustain= 2, velocity = 70)
+        playNote(E,0.25,sustain= 2)
+        playNote(G,0.25,sustain= 2)
+        playNote(A,0.25,sustain= 2)
+        playNote(C,0.25,sustain= 2)
+        playNote(E,0.25,sustain= 2)
+        playNote(G,0.25,sustain= 2)
+        playNote(A,0.5,sustain= 2)
+        playNote(E,0.25,sustain= 2)
+        playNote(C,0.25,sustain= 2)
+
+        playNote(A,0.25,sustain= 2)
+        playNote(B,0.25,sustain= 1)
+        playNote(D,0.25,sustain= 1)
+        playNote(C,0.25,sustain= 2)
+        playNote(B,0.25,sustain= 2)
+        playNote(Cl,0.25,sustain= 2)
+        playNote(D,0.25,sustain= 2)
+        playNote(C,0.25,sustain= 2)
+        playNote(Cl,0.25,sustain= 2)
+        playNote(G,0.25,sustain= 2)
+        playNote(D,0.25,sustain= 2)
+        playNote(C,0.25,sustain= 2)
+        playNote(D,0.25,sustain= 2)
+        playNote(E,0.25,sustain= 2)
+        playNote(G,0.25,sustain= 2)
+        playNote(C,0.25,sustain= 2)
+        playNote(E,0.25,sustain= 2)
+        playNote(G,0.25,sustain= 2)
+        playNote(D,0.5,sustain= 2)
+
+        playNote([Gl, Dh], 0.5,sustain= 2)
+        playNote(D,0.25,sustain= 2)
+        playNote(G,0.25,sustain= 2)
+        playNote(Gl,0.25,sustain= 2)
+        playNote(Dh,0.25,sustain= 2)
+        playNote(D,0.5,sustain= 2)
+        playNote([C,Gl],0.5,sustain= 2)
+        playNote(D,0.25,sustain= 2)
+        playNote(G,0.25,sustain= 2)
+        playNote(Gl,0.25,sustain= 2)
+        playNote(C,0.25,sustain= 2)
+        playNote(D,0.5,sustain= 2)
+
+        playNote([Bh, Gl], 0.5,sustain= 2)
+        playNote(E,0.25,sustain= 2)
+        playNote(G,0.25,sustain= 2)
+        playNote(Gl,0.25,sustain= 2)
+        playNote(C,0.25,sustain= 2)
+        playNote(D,0.5,sustain= 2)
+
+        playNote([Bh, Gl], 0.5,sustain= 2)
+        playNote(E,0.25,sustain= 2)
+        playNote(G,0.25,sustain= 2)
+        playNote(Gl,0.25,sustain= 2)
+        playNote(C,0.25,sustain= 2)
+        playNote(D,0.5,sustain= 2)
+
+for i in range(5):
+    Main() 
+
+rest(8)
+for i in range(50):
+    playNote(0,1)
+    
+    
+    chord1 = [40,45,52,55,60,64]
+chord2 = [40,48,52,55,60,64]
+chord3 = [40,48,52,55,62,64]
+chord4 = [43,47,50,55,59,64]
+
+rest(8)
+
+for i in range(5):
+    playNote(chord1,4,sustain = 2)
+    playNote(chord2,4,sustain = 2)
+    playNote(chord3,4,sustain = 2)
+    playNote(chord4,4,sustain = 2)
+
+# New TunePad cell
+C = 24
+A = 21
+E = 28
+D = 26
+
+rest(8)
+for i in range(5):
+    for i in range(8):
+        playNote(C, 0.5)
+    for i in range(8):
+        playNote(A, 0.5)  
+    for i in range(8):
+        playNote(E, 0.5)
+    for i in range(8):
+        playNote(D, 0.5)
+    
+    
+    # New TunePad cell
+C = 24
+A = 21
+E = 28
+D = 26
+
+rest(8)
+for i in range(5):
+    for i in range(8):
+        playNote(C, 0.5)
+    for i in range(8):
+        playNote(A, 0.5)  
+    for i in range(8):
+        playNote(E, 0.5)
+    for i in range(8):
+        playNote(D, 0.5)
+
+# New TunePad cell
+chord1 = [40,45,52,55,60,64]
+chord2 = [40,48,52,55,60,64]
+chord3 = [40,48,52,55,62,64]
+chord4 = [43,47,50,55,59,64]
+
+rest(8)
+
+for i in range(5):
+    playNote(chord1,4,sustain = 2)
+    playNote(chord2,4,sustain = 2)
+    playNote(chord3,4,sustain = 2)
+    playNote(chord4,4,sustain = 2)
+# New TunePad cell
+playNote(0)
+playNote(0)
+playNote(0)
+playNote(0)
+
+playNote(11, beats = 0.25)
+rest(0.25)
+playNote(11, beats = 0.25)
+rest(3.25)
+playNote(11, beats = 0.25)
+rest(0.25)
+playNote(11, beats = 0.25)
+rest(3.25)
+playNote(11, beats = 0.25)
+rest(0.25)
+playNote(11, beats = 0.25)
+
+    
+    
+    
+
+
