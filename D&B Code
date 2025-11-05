@@ -1,0 +1,170 @@
+playNote(0)
+playNote(0)
+playNote(0)
+playNote(0)
+
+rest(1)
+playNote(2)
+rest(1)
+playNote(2)
+
+rest(beats = 0.5) # rest for half of a beat
+
+# play 2 hi-hat sounds for a fourth of a beat each
+playNote(4, beats = 0.25) 
+playNote(4, beats = 0.25)
+
+rest(beats = 0.5)
+playNote(4)
+playNote(4)
+playNote(4, beats = 0.5)
+
+# simple bass line with a slide back to the root note
+playNote(21, 4)
+playNote(24, 4)
+playNote(23, 4)
+playNote(22, 3)
+with bend(cents = [ 0, -100 ], beats=1):
+    playNote(22, 1)
+ # simple bass line with a slide back to the root note
+playNote(21, 4)
+playNote(24, 4)
+playNote(23, 4)
+playNote(22, 3)
+with bend(cents = [ 0, -100 ], beats=1):
+    playNote(22, 1)
+
+# define variables for our drum sounds
+kick = 1
+snare = 2
+hat = 4
+
+# ------ helper functions ------
+def stutter(count):
+    for i in range(0, count):
+        playNote(hat, beats = 0.25 / count)
+
+def hats(count):
+    for i in range(0, count):
+        playNote(hat, beats = 0.25)
+
+# ------ kicks and snares (repeat twice) -------
+playNote(kick, beats = 0.75)
+playNote(kick, beats = 0.25)
+playNote(snare, beats = 0.5)
+playNote(kick, beats = 1)
+playNote(kick, beats = 0.5)
+playNote(snare, beats = 1)
+
+# ------ hi-hat pattern ------
+moveTo(0)
+hats(7)
+stutter(2)
+hats(1)
+stutter(3)
+hats(4)
+stutter(5)
+stutter(2)
+
+from random import choice, randint
+
+for i in range(40):
+    rest(0.5)
+    playNote(11, beats = 0.5, velocity = 70)
+moveTo(0)
+        
+def shake(beats):
+    for i in range(beats):
+        for j in range(4):
+            if randint(0, 10) > 8:
+                playNote(11, beats = 0.25, velocity = randint(50, 85))
+            else:
+                rest(0.25)
+shake(40)
+
+# New TunePad cellplayNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+rest(0.25)
+playNote(4, beats = 0.25)
+
+from random import choice, randint
+
+for i in range(40):
+    rest(0.5)
+    playNote(11, beats = 0.5, velocity = 70)
+moveTo(0)
+        
+def shake(beats):
+    for i in range(beats):
+        for j in range(4):
+            if randint(0, 10) > 8:
+                playNote(11, beats = 0.25, velocity = randint(50, 85))
+            else:
+                rest(0.25)
+shake(40)
+
+
+
