@@ -1,0 +1,96 @@
+A = 21
+B = 23
+E = 16
+
+playNote(A, beats = 3)
+playNote(B, beats = 1)
+playNote(E, beats = 3)
+playNote(E, beats = 1)
+
+playNote(0, beats = 0.5)
+playNote(5, beats = 0.5)
+playNote(2, beats = 0.25)
+playNote(0, beats = 0.75)
+playNote(0, beats = 0.5)
+playNote(5, beats = 0.5)
+playNote(2, beats = 1)
+
+G = 43
+A = 45
+B = 47
+C = 48
+E = 28
+
+playNote([A, C], beats = 0.25)
+playNote([A, C], beats = 0.25)
+playNote([G, B], beats = 0.25)
+playNote([G, B], beats = 3)
+# Defining variables
+B = 71
+C = 72
+E = 76
+G = 79
+A = 81
+
+
+Am = [ A, C, E ]       # A minor chord
+EmSus4 = [ A, B, E ]   # E minor 
+Em = [ G, B, E ]       # E minor
+
+# Code for piano keys
+for i in range(8):
+    playNote(Am, 0.50)
+    rest(0.50)
+
+for i in range(3):
+    playNote(EmSus4, 0.50)
+    rest(0.50)
+
+for i in range(5):
+    playNote(Em, 0.50)
+    rest(0.50)
+
+chord1 = [40,45,52,55,60,64]
+chord2 = [40,48,52,55,60,64]
+chord3 = [40,48,52,55,62,64]
+chord4 = [43,47,50,55,59,64]
+
+
+
+for i in range(5):
+    playNote(chord1,4,sustain = 2)
+    playNote(chord2,4,sustain = 2)
+    playNote(chord3,4,sustain = 2)
+    playNote(chord4,4,sustain = 2)
+
+
+# New TunePad cell
+# New TunePad cell
+playNote(66, beats=0.75)
+playNote(61, beats=0.75)
+playNote(69-12, beats=0.5)
+playNote(66-12, beats=0.75)
+playNote(69-12, beats=0.75)
+playNote(61, beats=0.5)
+
+playNote(62, beats=0.75)
+playNote(57, beats=0.75)
+playNote(66-12, beats=0.5)
+playNote(62-12, beats=0.75)
+playNote(66-12, beats=0.75)
+playNote(69-12, beats=0.5)
+
+playNote(61, beats=0.75)
+playNote(57, beats=0.75)
+playNote(52, beats=0.5)
+playNote(49, beats=0.75)
+playNote(52, beats=0.75)
+playNote(57, beats=0.5)
+
+playNote(59, beats=0.75)
+playNote(56, beats=0.75)
+playNote(52, beats=0.5)
+playNote(56, beats=0.75)
+playNote(59, beats=0.75)
+playNote(65, beats=0.5)
+
