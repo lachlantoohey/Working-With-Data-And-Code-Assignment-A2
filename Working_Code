@@ -1,33 +1,19 @@
-import tkinter as tk
+    import tkinter as tk
 from tkinter import messagebox
-import tkinter as tk
 
-# Create the main window
-root = tk.Tk()
-
-# Set window properties
-root.title("My First Tkinter App")
-root.geometry("1000x800")
-
-# Add a label widget
-label = tk.Label(root, text="Hello, Tkinter!")
-label.pack(pady=20) # Add some padding
-
-# Start the Tkinter event loop
-root.mainloop()
-# Mood Questions 
+# --- Mood Questions ---
 questions = [
     "How are you feeling today? (calm / hyped / in-between)",
     "Had a stressful day or a smooth one? (stressful / smooth)",
     "Craving something to lift your energy or help you unwind? (lift / unwind)",
     "Would you rather hear something soulful and slow, or upbeat with a groove? (soulful / groove)",
-    "Do you want something to hit deep, or a vibe that just feels good? (deep / feel-good)"
+    "Do you want lyrics that hit deep, or a vibe that just feels good? (deep / feel-good)"
 ]
 
 answers = []
 current_question = 0
 
-#  Main Function to Evaluate Mood 
+# --- Main Function to Evaluate Mood ---
 def get_vibe():
     calm_score = sum(a in ["calm", "unwind", "soulful", "deep"] for a in answers)
     hype_score = sum(a in ["hyped", "lift", "groove", "feel-good"] for a in answers)
@@ -64,9 +50,9 @@ def submit_answer():
 
 # --- Tkinter UI Setup ---
 root = tk.Tk()
-root.title("Project SoundState 🎧")
+root.title("Mood Music Recommender 🎧")
 root.geometry("500x300")
-root.config(bg="#5df2ff")
+root.config(bg="#1c1c1c")
 
 title_label = tk.Label(root, text="What's Your Mood?", font=("Helvetica", 18, "bold"), fg="#f5f5f5", bg="#1c1c1c")
 title_label.pack(pady=20)

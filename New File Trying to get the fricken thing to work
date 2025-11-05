@@ -1,0 +1,168 @@
+# Working_Code Interface Submission Day
+# Tkinter GUI: Mood Music Recommender 🎧
+# Now with a welcome screen before starting the quiz!
+
+import tkinter as tk                # Brings in Tkinter so we can make the window and widgets
+from tkinter import messagebox      # Lets us use popup messages (info + warnings)
+
+# --- The Questions and Accepted Answers ---
+# Each question has a text part (what gets shown) and a list of valid answers.
+questions = [
+    {
+        "text": "How are you feeling today? (calm / hyped / in-between)",
+        "options": ["calm", "hyped", "in-between"]
+    },
+    {
+        "text": "Had a stressful day or a smooth one? (stressful / smooth)",
+        "options": ["stressful", "smooth"]
+    },
+    {
+        "text": "Craving something to lift your energy or help you unwind? (lift / unwind)",
+        "options": ["lift", "unwind"]
+    },
+    {
+        "text": "Would you rather hear something soulful and slow, or upbeat with a groove? (soulful / groove)",
+        "options": ["soulful", "groove"]
+    },
+    {
+        "text": "Do you want music that hit deep, or a vibe that just feels good? (deep / feel-good)",
+        "options": ["deep", "feel-good"]
+    }
+]
+
+# Keeps the user’s answers and tracks which question they’re on
+answers = []
+current_question = 0
+
+# --- Figure Out the Music Vibe ---
+def get_vibe():
+    # Count how many chill answers vs. hype answers the user gave
+    calm_score = sum(a in ["calm", "unwind", "soulful", "deep"] for a in answers)
+    hype_score = sum(a in ["hyped", "lift", "groove", "feel-good"] for a in answers)
+
+    # Decide on the music vibe based on what they picked most
+    if calm_score >= 3:
+        vibe = "R&B Jam 🎶"
+        desc = "Smooth, soulful, and mellow — perfect for relaxing or reflecting."
+    elif hype_score >= 3:
+        vibe = "Drum & Bass ⚡"
+        desc = "Fast-paced, rhythmic, and energizing — great for focus or movement."
+    else:
+        vibe = "Indie Mix 🌙"
+        desc = "Dreamy, warm, and balanced — ideal for daydreaming or cruising."
+
+    # Show the final result in a popup window
+    messagebox.showinfo("Your Music Vibe", f"Recommended vibe: {vibe}\n\n{desc}")
+
+# --- What Happens When You Click Submit ---
+def submit_answer():
+    global current_question
+
+    # Grab what the user typed and make it lowercase (for easier checking)
+    ans = entry.get().strip().lower()
+
+    # Get the list of valid answers for this question
+    valid_options = questions[current_question]["options"]
+
+    # If they typed something not in the options, warn them
+    if ans not in valid_options:
+        messagebox.showwarning(
+            "Invalid Answer",
+            f"Please enter one of the provided options:\n\n{', '.join(valid_options)}"
+        )
+        return  # Don’t move on until they type something right
+
+    # Save the answer and clear the entry box
+    answers.append(ans)
+    entry.delete(0, tk.END)
+    current_question += 1
+
+    # Move to the next question or finish up
+    if current_question < len(questions):
+        question_label.config(text=questions[current_question]["text"])
+    else:
+        get_vibe()    # Run the mood check
+        root.destroy()  # Close the window after showing result
+
+# --- Start Quiz Function ---
+def start_quiz():
+    # Remove the welcome labels and button
+    welcome_label.pack_forget()
+    start_button.pack_forget()
+
+    # Show the first question and entry box
+    question_label.pack(pady=10)
+    entry.pack(pady=10)
+    submit_button.pack(pady=15)
+
+# --- Setting Up the Main Window ---
+# This makes the main app window
+root = tk.Tk()
+
+# Sets the title at the top of the window
+root.title("Mood Music Recommender 🎧")
+
+# Sets how big the window is
+root.geometry("500x300")
+
+# Gives the background a dark colour
+root.config(bg="#1c1c1c")
+
+# --- Welcome Screen ---
+# Label welcoming the user
+welcome_label = tk.Label(
+    root,
+    text="Welcome! Let's find the perfect music for your mood 🎵",
+    font=("Helvetica", 14, "bold"),
+    fg="#005fbd",
+    bg="#1c1c1c",
+    wraplength=450,
+    justify="center"
+)
+welcome_label.pack(pady=60)
+
+# Button to start the quiz
+start_button = tk.Button(
+    root,
+    text="Start Quiz",
+    font=("Helvetica", 12, "bold"),
+    bg="#4CAF50",
+    fg="blue",
+    width=12,
+    command=start_quiz
+)
+start_button.pack()
+
+# --- Question Label (Hidden until quiz starts) ---
+question_label = tk.Label(
+    root,
+    text=questions[current_question]["text"],
+    font=("Helvetica", 12),
+    fg="#0060bf",
+    bg="#1c1c1c",
+    wraplength=400,
+    justify="center"
+)
+
+# --- Entry Box (Hidden until quiz starts) ---
+entry = tk.Entry(
+    root,
+    font=("Helvetica", 12),
+    width=40,
+    justify="center"
+)
+
+# --- Submit Button (Hidden until quiz starts) ---
+submit_button = tk.Button(
+    root,
+    text="Submit",
+    font=("Helvetica", 12, "bold"),
+    bg="#4CAF50",
+    fg="blue",
+    width=10,
+    command=submit_answer
+)
+
+# --- Keeps the Window Running ---
+# This starts the event loop — keeps the app open until you close it
+root.mainloop()

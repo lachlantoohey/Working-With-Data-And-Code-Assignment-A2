@@ -1,0 +1,211 @@
+# Working_Code Interface Submission Day
+# Tkinter GUI: Mood Music Recommender 🎧 + Built-in MP3 Player
+# Now with a welcome screen and music playback!
+
+import tkinter as tk                # For making the GUI
+from tkinter import messagebox      # For popup messages
+import pygame                     # For playing MP3 music
+
+# --- The Questions and Accepted Answers ---
+# Each question has text and a list of valid answers.
+questions = [
+    {
+        "text": "How are you feeling today? (calm / hyped / in-between)",
+        "options": ["calm", "hyped", "in-between"]
+    },
+    {
+        "text": "Had a stressful day or a smooth one? (stressful / smooth)",
+        "options": ["stressful", "smooth"]
+    },
+    {
+        "text": "Craving something to lift your energy or help you unwind? (lift / unwind)",
+        "options": ["lift", "unwind"]
+    },
+    {
+        "text": "Would you rather hear something soulful and slow, or upbeat with a groove? (soulful / groove)",
+        "options": ["soulful", "groove"]
+    },
+    {
+        "text": "Do you want music that hits deep, or a vibe that just feels good? (deep / feel-good)",
+        "options": ["deep", "feel-good"]
+    }
+]
+
+# Keeps the user’s answers and tracks which question they’re on
+answers = []
+current_question = 0
+
+# --- Setup Pygame Mixer for Music ---
+# This is what plays our MP3 files
+pygame.mixer.init()
+
+# --- Function to Play Music ---
+def play_music(vibe):
+    # Stops anything already playing
+    pygame.mixer.music.stop()
+
+    # Picks the track based on the mood
+    if "R&B" in vibe:
+        track = "rnb.mp3"
+    elif "Drum" in vibe:
+        track = "dnb.mp3"
+    else:
+        track = "indie.mp3"
+
+    try:
+        pygame.mixer.music.load(track)
+        pygame.mixer.music.play()
+    except Exception as e:
+        messagebox.showerror("Music Error", f"Could not play {track}\n\n{e}")
+
+# --- Figure Out the Music Vibe ---
+def get_vibe():
+    # Count how many chill answers vs. hype answers the user gave
+    calm_score = sum(a in ["calm", "unwind", "soulful", "deep"] for a in answers)
+    hype_score = sum(a in ["hyped", "lift", "groove", "feel-good"] for a in answers)
+
+    # Decide on the music vibe
+    if calm_score >= 3:
+        vibe = "R&B Jam 🎶"
+        desc = "Smooth, soulful, and mellow — perfect for relaxing or reflecting."
+    elif hype_score >= 3:
+        vibe = "Drum & Bass ⚡"
+        desc = "Fast-paced, rhythmic, and energizing — great for focus or movement."
+    else:
+        vibe = "Indie Mix 🌙"
+        desc = "Dreamy, warm, and balanced — ideal for daydreaming or cruising."
+
+    # Show the final result in a popup
+    messagebox.showinfo("Your Music Vibe", f"Recommended vibe: {vibe}\n\n{desc}")
+
+    # Play the track that fits the mood
+    play_music(vibe)
+
+    # Show playback buttons
+    show_music_controls()
+
+# --- What Happens When You Click Submit ---
+def submit_answer():
+    global current_question
+
+    # Grab what the user typed and make it lowercase
+    ans = entry.get().strip().lower()
+    valid_options = questions[current_question]["options"]
+
+    # Check that the answer is valid
+    if ans not in valid_options:
+        messagebox.showwarning(
+            "Invalid Answer",
+            f"Please enter one of these: {', '.join(valid_options)}"
+        )
+        return
+
+    # Save the answer and clear the box
+    answers.append(ans)
+    entry.delete(0, tk.END)
+    current_question += 1
+
+    # Move to next question or finish up
+    if current_question < len(questions):
+        question_label.config(text=questions[current_question]["text"])
+    else:
+        # Hide quiz elements
+        question_label.pack_forget()
+        entry.pack_forget()
+        submit_button.pack_forget()
+
+        # Get their vibe and start music
+        get_vibe()
+
+# --- Start Quiz Function ---
+def start_quiz():
+    # Hide the welcome stuff
+    welcome_label.pack_forget()
+    start_button.pack_forget()
+
+    # Show the first question
+    question_label.pack(pady=10)
+    entry.pack(pady=10)
+    submit_button.pack(pady=15)
+
+# --- Music Control Buttons ---
+def show_music_controls():
+    # Show buttons for controlling music
+    play_button.pack(pady=5)
+    pause_button.pack(pady=5)
+    stop_button.pack(pady=5)
+
+def play_again():
+    pygame.mixer.music.unpause()
+
+def pause_music():
+    pygame.mixer.music.pause()
+
+def stop_music():
+    pygame.mixer.music.stop()
+
+# --- Setting Up the Main Window ---
+root = tk.Tk()
+root.title("Mood Music Recommender 🎧")
+root.geometry("500x400")
+root.config(bg="#1c1c1c")
+
+# --- Welcome Screen ---
+welcome_label = tk.Label(
+    root,
+    text="Welcome! Let's find the perfect music for your mood 🎵",
+    font=("Helvetica", 14, "bold"),
+    fg="#f5f5f5",
+    bg="#1c1c1c",
+    wraplength=450,
+    justify="center"
+)
+welcome_label.pack(pady=60)
+
+# --- Start Button ---
+start_button = tk.Button(
+    root,
+    text="Start Quiz",
+    font=("Helvetica", 12, "bold"),
+    bg="#4CAF50",
+    fg="blue",
+    width=12,
+    command=start_quiz
+)
+start_button.pack()
+
+# --- Quiz Elements (Hidden at first) ---
+question_label = tk.Label(
+    root,
+    text=questions[current_question]["text"],
+    font=("Helvetica", 12),
+    fg="#0060bf",
+    bg="#1c1c1c",
+    wraplength=400,
+    justify="center"
+)
+
+entry = tk.Entry(
+    root,
+    font=("Helvetica", 12),
+    width=40,
+    justify="center"
+)
+
+submit_button = tk.Button(
+    root,
+    text="Submit",
+    font=("Helvetica", 12, "bold"),
+    bg="#4CAF50",
+    fg="blue",
+    width=10,
+    command=submit_answer
+)
+
+# --- Music Control Buttons (Hidden until needed) ---
+play_button = tk.Button(root, text="▶️ Play", command=play_again, bg="#4CAF50", fg="white", width=10)
+pause_button = tk.Button(root, text="⏸️ Pause", command=pause_music, bg="#FFB300", fg="black", width=10)
+stop_button = tk.Button(root, text="⏹️ Stop", command=stop_music, bg="#E53935", fg="white", width=10)
+
+# --- Keeps the Window Running ---
+root.mainloop()
